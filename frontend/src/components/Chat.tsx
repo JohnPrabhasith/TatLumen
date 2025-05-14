@@ -48,12 +48,13 @@ function Chat() {
     const fetchHistory = async () => {
       try {
         const token = await getToken();
-        const res = await fetch("http://127.0.0.1:8000/history", {
+        const res = await fetch("https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/history", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
+          mode: "cors",
         });
         const data: QAHistoryItem[] = await res.json();
         setQaHistory(data);
@@ -74,12 +75,13 @@ function Chat() {
 
     try {
       const token = await getToken();
-      const response = await fetch("http://127.0.0.1:8000/query", {
+      const response = await fetch("https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/query", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+        mode: "cors",
         body: JSON.stringify({ websiteUrl, question, session_id: sessionId }),
       });
 
@@ -102,11 +104,12 @@ function Chat() {
 
   const fetchSessionMessages = async (sessionId: string) => {
     const token = await getToken();
-    const res = await fetch(`http://127.0.0.1:8000/session/${sessionId}`, {
+    const res = await fetch(`https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/session/${sessionId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+      mode: "cors",
     });
     const data = await res.json();
     setMessages(

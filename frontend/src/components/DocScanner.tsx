@@ -31,9 +31,13 @@ function DocScanner() {
   const fetchHistory = async () => {
     try {
       const token = await getToken();
-      const res = await fetch("http://127.0.0.1:8000/scan/history", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/scan/history",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          mode: "cors",
+        }
+      );
       const data = await res.json();
       setHistory(data);
     } catch (error) {
@@ -51,11 +55,15 @@ function DocScanner() {
       const formData = new FormData();
       if (docFile) formData.append("document", docFile);
 
-      const res = await fetch("http://127.0.0.1:8000/scan", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
+      const res = await fetch(
+        "https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/scan",
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+          mode: "cors",
+        },
+      );
 
       if (!res.ok) throw new Error("Scan failed");
 
@@ -73,9 +81,13 @@ function DocScanner() {
   const handleDownload = async (id: string, filename: string) => {
     try {
       const token = await getToken();
-      const res = await fetch(`http://127.0.0.1:8000/documents/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/documents/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          mode: "cors",
+        },
+      );
 
       if (!res.ok) throw new Error("Download failed");
 

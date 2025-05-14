@@ -22,10 +22,11 @@ export default function Culprit() {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/culprit", {
+      const response = await fetch("https://bbmc1pnnkd.execute-api.us-east-1.amazonaws.com/dev/culprit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic }),
+        mode: "cors",
       });
 
       const data = await response.json();

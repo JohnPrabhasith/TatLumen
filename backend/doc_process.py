@@ -17,15 +17,15 @@ groq_api_key = os.getenv("GROQ_API_KEY_MRVK")
 
 
 def load_document(file_path: str):
-    ext = file_path.lower().split(".")[-1]
-    if ext == "pdf":
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext == ".pdf":
         return PyPDFLoader(file_path)
-    elif ext == "txt":
-        return TextLoader(file_path)
-    elif ext == "docx":
+    elif ext == ".docx":
         return Docx2txtLoader(file_path)
+    elif ext == ".txt":
+        return TextLoader(file_path)
     else:
-        raise ValueError("Unsupported file format.")
+        raise ValueError("Unsupported file type")
 
 
 def summarize_document(file_path: str) -> str:
