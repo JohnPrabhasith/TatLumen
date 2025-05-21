@@ -15,7 +15,6 @@ from langchain_community.document_loaders import PyPDFLoader, TextLoader, Docx2t
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY_MRVK")
 
-
 def load_document(file_path: str):
     ext = os.path.splitext(file_path)[1].lower()
     if ext == ".pdf":
